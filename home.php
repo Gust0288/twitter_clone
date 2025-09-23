@@ -4,9 +4,21 @@ require_once __DIR__."/x.php";
 session_start();
 
 if(!isset($_SESSION["user"])){
-    header("location: index");
+    header("location: /");
     exit();
 }
+
+require_once __DIR__."/db.php";
+$q = "SELECT * FROM posts ORDER BY RAND() LIMIT 10";
+$stmt = $_db->prepare( $q );
+$stmt->execute();
+$posts = $stmt->fetchAll();
+
+
+$q2 = "SELECT * FROM users WHERE user_pk != ? ORDER BY RAND() LIMIT 10";
+$stmt2 = $_db->prepare( $q2 );
+$stmt2->execute([$_SESSION["user"]["user_pk"]]);
+$users = $stmt2->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -63,92 +75,16 @@ if(!isset($_SESSION["user"])){
         </nav>
 
         <main>
-            <main>
-                <article class="post">
-                    <img src="https://avatar.iran.liara.run/public/49" alt="Profile Picture" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="name">Alice Johnson</span>
-                            <span class="handle">@alicej</span> · <span class="time">2h</span>
-                        </div>
-                        <p class="text">Just tried the new coffee place downtown ☕️✨ Highly recommend it!</p>
-                        <div class="post-actions">
-                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
-                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
-                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
-                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
-                            <span class="action"><i class="fa-solid fa-share"></i></span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <img src="https://avatar.iran.liara.run/public/58" alt="Profile Picture" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="name">Marcus Lee</span>
-                            <span class="handle">@marcusl</span> · <span class="time">3h</span>
-                        </div>
-                        <p class="text">Finally finished my web dev project! 🚀 Super proud of how it turned out.</p>
-                        <img src="https://picsum.photos/500/300" alt="Post image" class="post-image">
-                    </div>
-                </article>
-
-                <article class="post">
-                    <img src="https://avatar.iran.liara.run/public/12" alt="Profile Picture" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="name">Lina Andersson</span>
-                            <span class="handle">@lina_a</span> · <span class="time">5h</span>
-                        </div>
-                        <p class="text">Anyone else excited for the weekend? 🌞</p>
-                        <div class="post-actions">
-                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
-                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
-                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
-                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
-                            <span class="action"><i class="fa-solid fa-share"></i></span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <img src="https://avatar.iran.liara.run/public/85" alt="Profile Picture" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="name">Tech Daily</span>
-                            <span class="handle">@techdaily</span> · <span class="time">8h</span>
-                        </div>
-                        <p class="text">Apple is rumored to release a foldable iPhone by 2026. Would you buy one? 📱</p>
-                        <div class="post-actions">
-                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
-                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
-                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
-                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
-                            <span class="action"><i class="fa-solid fa-share"></i></span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <img src="https://avatar.iran.liara.run/public/101" alt="Profile Picture" class="avatar">
-                    <div class="post-content">
-                        <div class="post-header">
-                            <span class="name">Jonas Schmidt</span>
-                            <span class="handle">@jonass</span> · <span class="time">1d</span>
-                        </div>
-                        <p class="text">Nothing beats a good run in the morning. 🏃‍♂️ #Fitness</p>
-                        <img src="https://picsum.photos/400/250" alt="Post image" class="post-image">
-                        <div class="post-actions">
-                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
-                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
-                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
-                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
-                            <span class="action"><i class="fa-solid fa-share"></i></span>
-                        </div>
-                    </div>
-                </article>
-            </main>
+            
+                <?php
+                // class="heart-btn"
+                ?>
+                <?php
+                foreach($posts as $post): 
+                    require __DIR__."/_tweet.php";
+                endforeach;
+                ?>
+            
 
         </main>
         <aside>
@@ -195,36 +131,11 @@ if(!isset($_SESSION["user"])){
             <div class="who-to-follow">
                 <h2>Who to follow</h2>
                 <div class="follow-suggestion">
-                    <div class="profile-info">
-
-                        <img src="https://avatar.iran.liara.run/public/94" alt="Profile Picture">
-                        <div class="info-copy">
-                            <p class="name">Kimberly Bryant</p>
-                            <p class="handle">@6Gems</p>
-                        </div>
-
-                        <button class="follow-btn">Follow</button>
-                    </div>
-                    <div class="profile-info">
-
-                        <img src="https://avatar.iran.liara.run/public/79" alt="Profile Picture">
-                        <div class="info-copy">
-                            <p class="name">Reshma Saujani</p>
-                            <p class="handle">@reshmasaujani</p>
-                        </div>
-
-                        <button class="follow-btn">Follow</button>
-                    </div>
-                    <div class="profile-info">
-
-                        <img src="https://avatar.iran.liara.run/public/95" alt="Profile Picture">
-                        <div class="info-copy">
-                            <p class="name">Vanessa Hurst</p>
-                            <p class="handle">@DBNess</p>
-                        </div>
-
-                        <button class="follow-btn">Follow</button>
-                    </div>
+                    <?php 
+                    foreach($users as $user): 
+                    require __DIR__."/_follows.php";
+                    endforeach;
+                    ?>
                     <button class="show-more-btn">Show more</button>
                 </div>
         </aside>
