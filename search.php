@@ -4,15 +4,10 @@ $two = $_GET["two"];
 $three = $_GET["three"];
 ?>
 
-searching for <?php echo "$one $two $three" ?>
+searching for <?php echo "$one $two $three"?>
 
 
 <form action="bridge-search" method="POST">
-    <input name="user_name" type="text">
+    <input type="text" name="user_name">
     <button>Search</button>
 </form>
-
-
-
-
-

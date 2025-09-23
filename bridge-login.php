@@ -5,34 +5,33 @@ try{
     $userEmail = _validateEmail();
     $userPassword = _validatePassword();
     require_once __DIR__."/db.php";
+    $sql = "SELECT * FROM users WHERE user_email = :email";
+    $stmt = $_db->prepare( $sql );
 
-    $sql = "SELECT * FROM users; WHERE user_email = :email";
-    $stmt = $_db->prepare($sql);
-    $stmt->bindValue(":email", $userEmail );
+    $stmt->bindValue(":email", $userEmail);
     $stmt->execute();
     $user = $stmt->fetch();
-    // echo $user; # IMPOSSIBLE Can't do it...
+    // echo $user;
     // var_dump($user);
-    // echo "<div>******</div></div>";
-    // print_r($user);
-    // echo "<div>******</div></div>";
+    // echo "<br>";
+    // print_r($user); 
+    // echo "<br>";
     // echo json_encode($user);
-    # Check if the user is in the DB?
-    if( ! $user ){
-        header("Location: login");
+    if(!$user){
+        header("Location: index");
         exit();
     }
-    if( ! password_verify($userPassword, $user["user_password"])){
-        header("Location: login");
+    if( !password_verify($userPassword, $user["user_password"])){
+        header("Location: index");
         exit();
-    }
+    };
     unset($user["user_password"]);
-    // var_dump($user);
     session_start();
     $_SESSION["user"] = $user;
-    header("Location: profile");
+    header("Location: home");
+
 }catch(Exception $e){
-    http_response_code( $e->getCode() );
+    http_response_code($e->getCode());
     _($e->getMessage());
-    
 }
+

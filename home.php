@@ -1,128 +1,234 @@
+<?php 
+require_once __DIR__."/x.php";
+// _noCache();
+session_start();
+
+if(!isset($_SESSION["user"])){
+    header("location: index");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script src="app.js" defer></script>
-    <title>Document</title>
+    <title>Welcome home <?php echo $_SESSION["user"]["user_first_name"]; ?></title>
 </head>
+
 <body>
-    
-<div id="container">
-
-    <nav>
-        <a href="">Twitter</a>
-        <a href="">Home</a>
-        <a href="">Explore</a>
-        <a href="">Notifications</a>
-        <a href="">Messages</a>
-        <a href="">Grok</a>
-        <a href="">Bookmarks</a>
-        <a href="">Jobs</a>
-        <a href="">Communities</a>
-        <a href="">Premium</a>
-        <a href="">Verified Orgs</a>
-        <a href="">Profile</a>
-        <a href="">More</a>
-        <button>
-            Post
+    <div id="container">
+        <button class="burger" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
         </button>
-        <div>
-            Santiago Donoso
-        </div>
-    </nav>
+        <nav>
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>Explore</span></a></li>
+                    <li><a href="#"><i class="fa-regular fa-bell"></i><span>Notifications</span></a></li>
+                    <li><a href="#"><i class="fa-regular fa-envelope"></i><span>Messages</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-atom"></i><span>Grok</span></a></li>
+                    <li><a href="#"><i class="fa-regular fa-bookmark"></i><span>Bookmarks</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-briefcase"></i><span>Jobs</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-users"></i><span>Communities</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-star"></i><span>Premium</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-bolt"></i><span>Verified Orgs</span></a></li>
+                    <li><a href="#"><i class="fa-regular fa-user"></i><span>Profile</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-ellipsis"></i><span>More</span></a></li>
+                    <li><a href="bridge-logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></li>
+                </ul>
 
+                <button class="post-btn">Post</button>
 
-    <main>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-    </main>
-
-
-    <aside>
-        <form>
-            <input type="text" placeholder="search">
-        </form>
-        <div class="likes">
-            <h2>
-                You might like
-            </h2>
-            <div>
-                <div class="title">
-                    <p>Trending in Denmark</p>
-                    <p>Hot</p>
+                <div id="profile_tag">
+                    <img src="https://avatar.iran.liara.run/public/73" alt="Profile">
+                    <div>
+                        <div class="name">
+                            <?php echo $_SESSION["user"]["user_first_name"]; ?>
+                        </div>
+                        <div class="handle">
+                            <?php echo "@".$_SESSION["user"]["user_email"]; ?> 
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-ellipsis option"></i>
                 </div>
-                <div class="more">...</div>
-            </div>
-            <div>
-                <div class="title">
-                    <p>Better schools in Europe</p>
-                    <p>Wild</p>
+        </nav>
+
+        <main>
+            <main>
+                <article class="post">
+                    <img src="https://avatar.iran.liara.run/public/49" alt="Profile Picture" class="avatar">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="name">Alice Johnson</span>
+                            <span class="handle">@alicej</span> · <span class="time">2h</span>
+                        </div>
+                        <p class="text">Just tried the new coffee place downtown ☕️✨ Highly recommend it!</p>
+                        <div class="post-actions">
+                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
+                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
+                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
+                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
+                            <span class="action"><i class="fa-solid fa-share"></i></span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <img src="https://avatar.iran.liara.run/public/58" alt="Profile Picture" class="avatar">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="name">Marcus Lee</span>
+                            <span class="handle">@marcusl</span> · <span class="time">3h</span>
+                        </div>
+                        <p class="text">Finally finished my web dev project! 🚀 Super proud of how it turned out.</p>
+                        <img src="https://picsum.photos/500/300" alt="Post image" class="post-image">
+                    </div>
+                </article>
+
+                <article class="post">
+                    <img src="https://avatar.iran.liara.run/public/12" alt="Profile Picture" class="avatar">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="name">Lina Andersson</span>
+                            <span class="handle">@lina_a</span> · <span class="time">5h</span>
+                        </div>
+                        <p class="text">Anyone else excited for the weekend? 🌞</p>
+                        <div class="post-actions">
+                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
+                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
+                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
+                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
+                            <span class="action"><i class="fa-solid fa-share"></i></span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <img src="https://avatar.iran.liara.run/public/85" alt="Profile Picture" class="avatar">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="name">Tech Daily</span>
+                            <span class="handle">@techdaily</span> · <span class="time">8h</span>
+                        </div>
+                        <p class="text">Apple is rumored to release a foldable iPhone by 2026. Would you buy one? 📱</p>
+                        <div class="post-actions">
+                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
+                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
+                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
+                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
+                            <span class="action"><i class="fa-solid fa-share"></i></span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <img src="https://avatar.iran.liara.run/public/101" alt="Profile Picture" class="avatar">
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="name">Jonas Schmidt</span>
+                            <span class="handle">@jonass</span> · <span class="time">1d</span>
+                        </div>
+                        <p class="text">Nothing beats a good run in the morning. 🏃‍♂️ #Fitness</p>
+                        <img src="https://picsum.photos/400/250" alt="Post image" class="post-image">
+                        <div class="post-actions">
+                            <span class="action"><i class="fa-regular fa-comment"></i> 12</span>
+                            <span class="action"><i class="fa-solid fa-retweet"></i> 5</span>
+                            <span class="action heart-btn"><i class="fa-regular fa-heart"></i> 87</span>
+                            <span class="action"><i class="fa-solid fa-chart-simple"></i> 230</span>
+                            <span class="action"><i class="fa-solid fa-share"></i></span>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+        </main>
+        <aside>
+            <form action="">
+                <input type="text" placeholder="Search Twitter">
+                <button>Search</button>
+            </form>
+            <div class="happening-now">
+                <h2>What's happening now</h2>
+                <div class="trending">
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="item_title">Trending in Denmark</span>
+                            <p>Grækenland</p>
+                        </div>
+                        <span class="option">⋮</span>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="item_title">Politics . Trending</span>
+                            <p>Syria</p>
+                        </div>
+                        <span class="option">⋮</span>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="item_title">Bussiness . Trending</span>
+                            <p>#AlgoTrading</p>
+                        </div>
+                        <span class="option">⋮</span>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-info">
+                            <span class="item_title">Trending in Denmark</span>
+                            <p>Italien</p>
+                        </div>
+                        <span class="option">⋮</span>
+                    </div>
+                    <button class="show-more-btn">Show more</button>
                 </div>
-                <div class="more">...</div>
+
             </div>
-            <div>
-                <div class="title">
-                    <p>More people going to work</p>
-                    <p>Nicer</p>
+            <hr>
+            <div class="who-to-follow">
+                <h2>Who to follow</h2>
+                <div class="follow-suggestion">
+                    <div class="profile-info">
+
+                        <img src="https://avatar.iran.liara.run/public/94" alt="Profile Picture">
+                        <div class="info-copy">
+                            <p class="name">Kimberly Bryant</p>
+                            <p class="handle">@6Gems</p>
+                        </div>
+
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                    <div class="profile-info">
+
+                        <img src="https://avatar.iran.liara.run/public/79" alt="Profile Picture">
+                        <div class="info-copy">
+                            <p class="name">Reshma Saujani</p>
+                            <p class="handle">@reshmasaujani</p>
+                        </div>
+
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                    <div class="profile-info">
+
+                        <img src="https://avatar.iran.liara.run/public/95" alt="Profile Picture">
+                        <div class="info-copy">
+                            <p class="name">Vanessa Hurst</p>
+                            <p class="handle">@DBNess</p>
+                        </div>
+
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                    <button class="show-more-btn">Show more</button>
                 </div>
-                <div class="more">...</div>
-            </div> 
-            <a href="">
-                Show more
-            </a>                       
-        </div>
-        <div class="trending">
-            <h2>
-                Who to follow
-            </h2>
-
-            <div>
-                <img class="thumbnail" src="images/1.jpg">            
-                <div class="user_info">
-                    <p>Santiago Donoso</p>
-                    <p>@santi</p>
-                </div> 
-                <button>
-                    Follow
-                </button>               
-            </div>
-
-            <div>
-                <img class="thumbnail" src="images/2.jpg">
-                <div class="user_info">
-                    <p>Anna Madsen</p>
-                    <p>@annamadsen</p>
-                </div> 
-                <button>
-                    Follow
-                </button>               
-            </div>            
-
-            <div>
-                <img class="thumbnail" src="images/3.jpg">
-                <div class="user_info">
-                    <p>Mauri Che</p>
-                    <p>@mache</p>
-                </div> 
-                <button>
-                    Follow
-                </button>               
-            </div> 
-
-            <a href="">
-                Show more
-            </a>
-
-        </div>
-    </aside>
-
-</div>
-
-
+        </aside>
+    </div>
 </body>
+
 </html>

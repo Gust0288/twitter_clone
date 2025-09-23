@@ -19,5 +19,5 @@ try{
   
 }catch(PDOException $ex){
   echo $ex;  
-  exit();
+  exit(); //die
 }

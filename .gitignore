@@ -1,0 +1,44 @@
+# Dependencies
+/vendor/
+/node_modules/
+/composer.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.backup
+
+# User uploaded content
+/public/uploads/
+/public/images/profile/
+
+# Cache and logs
+/var/cache/
+/var/logs/
+/storage/logs/
+*.log
+
+# Build files
+/public/build/
+/public/dist/
+/public/hot
+/public/storage
+
+# IDE and editor files
+/.idea/
+/.vscode/
+/.phpstorm.meta.php
+/_ide_helper.php
+/_ide_helper_models.php
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Misc
+/phpunit.xml
+/.phpunit.result.cache
+/coverage/
+npm-debug.log
+yarn-error.log
