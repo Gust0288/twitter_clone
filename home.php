@@ -14,11 +14,17 @@ $stmt = $_db->prepare( $q );
 $stmt->execute();
 $posts = $stmt->fetchAll();
 
+// more advanced more secure
+// $loggedInUser = $_SESSION["user"]["user_pk"];
+// $stmt = $_db->prepare( $q2 );
+// $q2 = "SELECT * FROM users WHERE user_pk != :loggedInUser ORDER BY RAND() LIMIT 10";
+// $stmt2->execute([":loggedInUser" => $loggedInUser]);
 
+//easier way
 $q2 = "SELECT * FROM users WHERE user_pk != ? ORDER BY RAND() LIMIT 10";
-$stmt2 = $_db->prepare( $q2 );
-$stmt2->execute([$_SESSION["user"]["user_pk"]]);
-$users = $stmt2->fetchAll();
+$stmt = $_db->prepare( $q2 );
+$stmt->execute([$_SESSION["user"]["user_pk"]]);
+$users = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
