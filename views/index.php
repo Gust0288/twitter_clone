@@ -1,7 +1,7 @@
 
 <?php 
 $title = "Welcome";
-require_once __DIR__."/_header.php"; 
+require_once __DIR__."/../components/_header.php"; 
 ?>
 
 
@@ -28,12 +28,12 @@ require_once __DIR__."/_header.php";
 
 
 <?php 
-require_once __DIR__."/db.php";
-require_once __DIR__."/_login-dialog.php"; 
-require_once __DIR__."/_signup-dialog.php"; 
+require_once __DIR__."/../db.php";
+require_once __DIR__."/../components/_login-dialog.php"; 
+require_once __DIR__."/../components/_signup-dialog.php"; 
 
 ?>
 
 </main>
 
-<?php require_once __DIR__."/_footer.php"; ?>
+<?php require_once __DIR__."/../components/_footer.php"; ?>

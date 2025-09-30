@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__."/x.php";
+require_once __DIR__."/../x.php";
 // _noCache();
 session_start();
 
@@ -8,7 +8,7 @@ if(!isset($_SESSION["user"])){
     exit();
 }
 
-require_once __DIR__."/db.php";
+require_once __DIR__."/../db.php";
 $q = "SELECT * FROM posts ORDER BY RAND() LIMIT 10";
 $stmt = $_db->prepare( $q );
 $stmt->execute();
@@ -33,10 +33,10 @@ $users = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script src="app.js" defer></script>
+    <script src="/js/app.js" defer></script>
     <title>Welcome home <?php echo $_SESSION["user"]["user_first_name"]; ?></title>
 </head>
 
@@ -61,7 +61,7 @@ $users = $stmt->fetchAll();
                     <li><a href="#"><i class="fa-solid fa-bolt"></i><span>Verified Orgs</span></a></li>
                     <li><a href="#"><i class="fa-regular fa-user"></i><span>Profile</span></a></li>
                     <li><a href="#"><i class="fa-solid fa-ellipsis"></i><span>More</span></a></li>
-                    <li><a href="bridge-logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></li>
+                    <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></li>
                 </ul>
 
                 <button class="post-btn">Post</button>
@@ -87,7 +87,7 @@ $users = $stmt->fetchAll();
                 ?>
                 <?php
                 foreach($posts as $post): 
-                    require __DIR__."/_tweet.php";
+                    require __DIR__."/../components/_tweet.php";
                 endforeach;
                 ?>
             
@@ -139,7 +139,7 @@ $users = $stmt->fetchAll();
                 <div class="follow-suggestion">
                     <?php 
                     foreach($users as $user): 
-                    require __DIR__."/_follows.php";
+                    require __DIR__."/../components/_follows.php";
                     endforeach;
                     ?>
                     <button class="show-more-btn">Show more</button>

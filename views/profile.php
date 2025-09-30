@@ -45,7 +45,7 @@ if( ! isset($_SESSION["user"]) ){
         ?>
     </div>    
 
-    <a href="bridge-logout">
+    <a href="/logout">
         Logout
     </a>
 

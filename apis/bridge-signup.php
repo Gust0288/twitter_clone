@@ -1,7 +1,7 @@
 <?php 
 
 try{
-    require_once __DIR__."/x.php";
+    require_once __DIR__."/../x.php";
     $userFirstName = trim($_POST["user_first_name"]);
     if(strlen($userFirstName) < 2){
         throw new Exception("First name must be at least 2 characters long", 400);
@@ -24,7 +24,7 @@ try{
     // $userPk = generate_uuid4_nodash();
     $userPk = bin2hex(random_bytes(25));
 
-    require_once __DIR__."/db.php";
+    require_once __DIR__."/../db.php";
     $sql = "INSERT INTO users (user_pk, user_first_name, user_email, user_password) VALUES (:user_pk, :first_name, :email, :password)";
     $stmt = $_db->prepare( $sql );
 
@@ -35,7 +35,7 @@ try{
 
     $stmt->execute();
 
-    header("Location: index");
+    header("Location: /");
     exit();
 }
 catch(Exception $e){

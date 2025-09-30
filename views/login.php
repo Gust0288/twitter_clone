@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <form action="bridge-login" method="POST" autocomplete="off">
+    <form action="/login" method="POST" autocomplete="off">
         <input name="user_email" type="text" placeholder="email">
         <input name="user_password" type="text" placeholder="password">
         <button>

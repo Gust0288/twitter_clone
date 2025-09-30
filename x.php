@@ -1,9 +1,9 @@
 <?php
 
-function _($text){
-    echo htmlspecialchars($text);
+// function _($text){
+//     echo htmlspecialchars($text);
 
-}
+// }
 
 define("emailMin", 6);
 define("emailMax", 50);

@@ -1,10 +1,10 @@
 <?php
 
 try{
-    require_once __DIR__."/x.php";
+    require_once __DIR__."/../x.php";
     $userEmail = _validateEmail();
     $userPassword = _validatePassword();
-    require_once __DIR__."/db.php";
+    require_once __DIR__."/../db.php";
     $sql = "SELECT * FROM users WHERE user_email = :email";
     $stmt = $_db->prepare( $sql );
 
@@ -18,11 +18,11 @@ try{
     // echo "<br>";
     // echo json_encode($user);
     if(!$user){
-        header("Location: index");
+        header("Location: /");
         exit();
     }
     if( !password_verify($userPassword, $user["user_password"])){
-        header("Location: index");
+        header("Location: /");
         exit();
     };
     unset($user["user_password"]);

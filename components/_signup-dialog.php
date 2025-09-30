@@ -11,7 +11,7 @@
       </svg>
     </div>
     <h2 id="signupTitle">Create your account</h2>
-    <form class="x-dialog__form" action="bridge-signup" method="POST" autocomplete="off">
+    <form class="x-dialog__form" action="/signup" method="POST" autocomplete="off">
       <input name="user_first_name" type="text" placeholder="Name" required>
       <input name="user_email" type="email" placeholder="Email" required>
       <input name="user_password" type="password" placeholder="Password" required>

